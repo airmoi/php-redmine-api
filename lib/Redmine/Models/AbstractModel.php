@@ -128,20 +128,20 @@ abstract class  AbstractModel {
     }
     
     public function populate($data){
-        $attributesList =  $this->attributes();
+        $attributes =  $this->attributes();
         foreach($data as $attribute => $value) {
-            if(in_array($attribute, $attributesList)){
+            if(in_array($attribute, $attributes)){
                 $this->$attribute = $value;
             }
-            elseif( $attribute == 'custom_fields') {
+            elseif( $attribute == 'custom_fields') { //Handle custom fields
                 foreach( $value as $customField ){
                     $this->addCustomField($customField);
                 }
             }
-            elseif ( is_array($value)) {
+            elseif ( is_array($value)) { //Split compound fields [id, name] to field_id, field_name attributes
                 foreach ($value as $key => $subValue) {
                     $attributeName = $attribute . '_' . $key;
-                    if(in_array($attributeName, $attributesList)) {
+                    if(in_array($attributeName, $attributes)) {
                         $this->$attributeName = $subValue;
                     }
                 }

@@ -79,13 +79,13 @@ class Issue extends AbstractModel {
         ];
     }
     
-    public function populate($data) {
-        parent::populate($data);
+    public function populate($row) {
+        parent::populate($row);
         
         // populate journal
-        if(isset($data['journals'])){
-            foreach ( $data['journals'] as $record ) {
-                $this->journals[] = new Journal($record);
+        if(isset($row['journals'])){
+            foreach ( $row['journals'] as $journal ) {
+                $this->journals[] = new Journal($journal);
             }
         }
     }  

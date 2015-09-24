@@ -17,6 +17,11 @@ abstract class AbstractApi
      * @var Client
      */
     protected $client;
+    
+    public $limit;
+    public $offset;
+    public $total_count;
+    
 
     /**
      * @param Client $client
@@ -139,7 +144,7 @@ abstract class AbstractApi
 
         $ret = array();
 
-        $limit = $params['limit'];
+        $limit = $requestedLimit = $params['limit'];
         $offset = $params['offset'];
 
         while ($limit > 0) {
@@ -166,7 +171,14 @@ abstract class AbstractApi
                 $limit = 0;
             }
         }
-
+        if(is_array($ret['total_count'])){
+            $ret['total_count'] = $requestedLimit[0];
+            $ret['offset'] = $ret['offset'][0];
+            $ret['limit'] = $requestedLimit;
+        }
+        $this->total_count = $requestedLimit;
+        $this->offset = $ret['offset'];
+        $this->limit = $ret['limit'];
         return $ret;
     }
 
