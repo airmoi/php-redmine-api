@@ -34,11 +34,16 @@ class Issue extends AbstractApi
      *
      * @param array $params the additional parameters (cf avaiable $params above)
      *
-     * @return array list of issues found
+     * @return \Redmine\Models\Issue[] list of issues found
      */
     public function all(array $params = array())
     {
-        return $this->retrieveAll('/issues.json', $params);
+        $all = $this->retrieveAll('/issues.json', $params);
+        $resultSet = [];
+        foreach($all['issues'] as $issue) {
+            $resultSet[] = new \Redmine\Models\Issue($this->client, $issue);
+        }
+        return $resultSet;
     }
 
     /**
@@ -51,15 +56,15 @@ class Issue extends AbstractApi
      * @param string $id     the issue id
      * @param array  $params extra associated data
      *
-     * @return array information about the issue
+     * @return \Redmine\Models\Issue information about the issue
      */
     public function show($id, array $params = array())
     {
         if (isset($params['include']) && is_array($params['include'])) {
             $params['include'] = implode(',', $params['include']);
         }
-
-        return $this->get('/issues/'.urlencode($id).'.json?'.http_build_query($params));
+        $issue = $this->get('/issues/'.urlencode($id).'.json?'.http_build_query($params));
+        return new \Redmine\Models\Issue($this->client, $issue['issue']);
     }
 
     /**
