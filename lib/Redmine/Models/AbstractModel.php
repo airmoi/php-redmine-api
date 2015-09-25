@@ -86,6 +86,20 @@ abstract class  AbstractModel {
             throw new \InvalidArgumentException('Getting unknown property: ' . get_class($this) . '::' . $name);
         }
     }
+    
+    /**
+     * Returns the attribute labels.
+     *
+     * Attribute labels are mainly used for display purpose. For example, given an attribute
+     * `firstName`, we can declare a label `First Name` which is more user-friendly and can
+     * be displayed to end users.
+     *
+     * @return array attribute labels (name => label)
+     */
+    public function attributeLabels(){
+        return [];
+    }
+    
 
     /**
      * PHP setter magic method.
@@ -147,6 +161,21 @@ abstract class  AbstractModel {
                 }
             }
         }
+    }
+    
+    /**
+     * Returns the text label for the specified attribute.
+     * @param string $attribute the attribute name
+     * @return string the attribute label
+     */
+    public function getAttributeLabel($attribute)
+    {
+        $labels = $this->attributeLabels();
+        if (isset($labels[$attribute])) {
+            return ($labels[$attribute]);
+        }
+
+        return $attribute;
     }
     
     /**

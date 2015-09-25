@@ -73,6 +73,36 @@ class Issue extends AbstractModel {
         ];
     }
     
+    public function attributeLabels(){
+        return [
+            'id' => '#',
+            'subject' => 'Sujet',
+            'description' => 'Description',
+            'project_id' => 'Code Projet',
+            'project_name' => 'Projet',
+            'category_id' => 'Code Catégorie',
+            'category_name' => 'Catégorie',
+            'priority_id' => 'Code priorité',
+            'priority_name' => 'Priorité',
+            'status_id' => 'Code statut',
+            'status_name' => 'Statut',
+            'tracker_id' => 'Code Tracker',
+            'tracker_name' => 'Tracker',
+            'assigned_to_id' => 'Id utilisateur assigné',
+            'assigned_to_name' => 'Assigné à',
+            'author_id' => 'ID utilisateur auteur',
+            'author_name' => 'Ajouté par',
+            'due_date' => 'Echéance',
+            'start_date' => 'Début',
+            'watcher_user_ids' => 'Surveillé par',
+            'fixed_version_id' => 'ID version FIX',
+            'fixed_version_name' => 'Fixé en version',
+            'created_on' => 'Crée le',
+            'updated_on' => 'Mis à jour le',
+            'done_ratio' => '% réalisé',
+        ];
+    }
+    
     public function relations() {
         return [
             'project' => ['Project', 'project_id']
