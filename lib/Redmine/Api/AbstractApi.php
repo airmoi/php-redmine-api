@@ -172,11 +172,11 @@ abstract class AbstractApi
             }
         }
         if(is_array($ret['total_count'])){
-            $ret['total_count'] = $requestedLimit[0];
+            $ret['total_count'] = $ret['total_count'][0];
             $ret['offset'] = $ret['offset'][0];
             $ret['limit'] = $requestedLimit;
         }
-        $this->total_count = $requestedLimit;
+        $this->total_count = $ret['total_count'];
         $this->offset = $ret['offset'];
         $this->limit = $ret['limit'];
         return $ret;

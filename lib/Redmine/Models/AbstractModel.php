@@ -81,9 +81,9 @@ abstract class  AbstractModel {
             $getter = 'get' . $name;
             return $this->$getter();
         } elseif (method_exists($this, 'set' . $name)) {
-            throw new InvalidArgumentException('Getting write-only property: ' . get_class($this) . '::' . $name);
+            throw new \InvalidArgumentException('Getting write-only property: ' . get_class($this) . '::' . $name);
         } else {
-            throw new InvalidArgumentException('Getting unknown property: ' . get_class($this) . '::' . $name);
+            throw new \InvalidArgumentException('Getting unknown property: ' . get_class($this) . '::' . $name);
         }
     }
 
@@ -106,9 +106,9 @@ abstract class  AbstractModel {
 
                 return;
             } elseif (method_exists($this, 'get' . $name)) {
-                throw new InvalidArgumentException('Setting read-only property: ' . get_class($this) . '::' . $name);
+                throw new \InvalidArgumentException('Setting read-only property: ' . get_class($this) . '::' . $name);
             } else {
-                throw new InvalidArgumentException('Setting unknown property: ' . get_class($this) . '::' . $name);
+                throw new \InvalidArgumentException('Setting unknown property: ' . get_class($this) . '::' . $name);
             }
         }
     }

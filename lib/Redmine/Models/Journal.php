@@ -31,7 +31,7 @@ class Journal {
     
     public function __construct($data) {
         $this->id = $data['id'];
-        $this->notes = $data['notes'];
+        $this->notes = @$data['notes'];
         $this->user_id = $data['user']['id'];
         $this->user_name = $data['user']['name'];
         $this->created_on = $data['created_on'];
